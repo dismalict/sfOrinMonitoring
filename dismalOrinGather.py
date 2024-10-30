@@ -335,7 +335,8 @@ def main():
                     'vulkan': device_info.get('vulkan'),
                     'opencv': device_info.get('opencv')
                 }
-
+                stats = jetson.stats
+                print("Current stats keys:", stats.keys())  # Print available keys
                 # Insert into both tables
                 insert_data(cursor, hostname, data)  # Insert into the current table
                 insert_data(cursor, storage_table_name, data)  # Insert into the long-term storage table
