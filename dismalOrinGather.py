@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 from jtop import jtop, JtopException
 import socket
+import time
 from configparser import ConfigParser
 from datetime import datetime
 import psutil
@@ -252,8 +253,7 @@ def trim_table(cursor, table_name, row_limit=50):
     );
     """
     cursor.execute(trim_query)
-    print(f"Trimmed `{table_name}` to {row_limit} rows.")
-
+    
 def main():
     hostname = socket.gethostname()
     storage_table_name = f"{hostname}_storage"  # Define the storage table name
@@ -297,14 +297,14 @@ def main():
                     'SE': stats.get('SE', 'OFF'),
                     'VIC': stats.get('VIC', 'OFF'),
                     'Fan pwmfan0': stats.get('Fan pwmfan0', 0.0),
-                    'Temp CPU': stats.get('Temp CPU', 0.0),
-                    'Temp CV0': stats.get('Temp CV0', 0.0),
-                    'Temp CV1': stats.get('Temp CV1', 0.0),
-                    'Temp CV2': stats.get('Temp CV2', 0.0),
-                    'Temp GPU': stats.get('Temp GPU', 0.0),
-                    'Temp SOC0': stats.get('Temp SOC0', 0.0),
-                    'Temp SOC1': stats.get('Temp SOC1', 0.0),
-                    'Temp SOC2': stats.get('Temp SOC2', 0.0),
+                    'Temp cpu': stats.get('Temp cpu', 0.0),
+                    'Temp cv0': stats.get('Temp cv0', 0.0),
+                    'Temp cv1': stats.get('Temp cv1', 0.0),
+                    'Temp cv2': stats.get('Temp cv2', 0.0),
+                    'Temp gpu': stats.get('Temp gpu', 0.0),
+                    'Temp soc0': stats.get('Temp soc0', 0.0),
+                    'Temp soc1': stats.get('Temp soc1', 0.0),
+                    'Temp soc2': stats.get('Temp soc2', 0.0),
                     'Temp tj': stats.get('Temp tj', 0.0),
                     'Power CPU': stats.get('Power CPU', 0),
                     'Power CV': stats.get('Power CV', 0),
@@ -336,7 +336,9 @@ def main():
                     'opencv': device_info.get('opencv')
                 }
                 stats = jetson.stats
-                print("Current stats keys:", stats.keys())  # Print available keys
+                #print("Current stats keys:", stats.keys())  # Print available keys
+                print("Data Inserted", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                
                 # Insert into both tables
                 insert_data(cursor, hostname, data)  # Insert into the current table
                 insert_data(cursor, storage_table_name, data)  # Insert into the long-term storage table
@@ -345,6 +347,8 @@ def main():
                 trim_table(cursor, hostname, row_limit=50)
 
                 connection.commit()
+                #interval which the data sends
+                time.sleep(1)
 
     except Error as e:
         print(f"MySQL Error: {e}")
