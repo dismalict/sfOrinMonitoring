@@ -26,11 +26,11 @@ pip3 install --upgrade \
     
 # Ensure other packages is installed
 apt-get install -y nano
-
+apt-get install python-is-python3
 apt-get upgrade
 
 cp dismalOrinGather.service /etc/systemd/system
 systemctl daemon-reload
-sudo systemctl enable dismalOrinGather.service
-sudo systemctl start dismalOrinGather.service
+systemctl enable dismalOrinGather.service
+systemctl start dismalOrinGather.service
 
