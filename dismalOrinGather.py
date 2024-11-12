@@ -337,7 +337,7 @@ def main():
                 }
                 stats = jetson.stats
                 #print("Current stats keys:", stats.keys())  # Print available keys
-                #print("Data Inserted", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                print("Data Inserted", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
                 #print(f"Temp CPU: {stats.get('Temp CPU')}")
                 #print(f"Temp CV0: {stats.get('Temp cv0')}")
                 #print(f"Temp GPU: {stats.get('Temp GPU')}")
