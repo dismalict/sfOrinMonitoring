@@ -348,7 +348,7 @@ def main():
 
                 connection.commit()
                 #interval which the data sends
-                time.sleep(1)
+                time.sleep(5)
 
     except Error as e:
         print(f"MySQL Error: {e}")
