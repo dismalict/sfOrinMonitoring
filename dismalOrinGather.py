@@ -303,7 +303,7 @@ def main():
                     'Temp cv2': stats.get('Temp cv2', 0.0),
                     'Temp gpu': stats.get('Temp gpu', 0.0),
                     'Temp soc0': stats.get('Temp soc0', 0.0),
-                    'Temp soc1': stats.get('Temp soc', 0.0),
+                    'Temp soc1': stats.get('Temp soc1', 0.0),
                     'Temp soc2': stats.get('Temp soc2', 0.0),
                     'Temp tj': stats.get('Temp tj', 0.0),
                     'Power CPU': stats.get('Power CPU', 0),
