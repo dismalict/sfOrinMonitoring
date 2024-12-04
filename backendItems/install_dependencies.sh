@@ -27,7 +27,7 @@ fi
 echo "Checking if nano is installed..."
 if ! dpkg -l | grep -qw nano; then
     echo "Nano not found, installing nano..."
-    apt-get install -y nano
+    sudo apt install -y nano
 else
     echo "Nano is already installed."
 fi
