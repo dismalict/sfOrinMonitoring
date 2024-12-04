@@ -23,6 +23,15 @@ else
     echo "Chrony is already installed."
 fi
 
+# Ensure nano is installed
+echo "Checking if nano is installed..."
+if ! dpkg -l | grep -qw nano; then
+    echo "Nano not found, installing nano..."
+    apt-get install -y nano
+else
+    echo "Nano is already installed."
+fi
+
 # Install pip if not installed
 if ! command -v pip &> /dev/null; then
     echo "pip not found, installing..."
