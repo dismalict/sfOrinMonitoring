@@ -10,6 +10,19 @@ fi
 echo "Updating package list..."
 apt-get update
 
+# Install Chrony
+echo "Checking if Chrony is installed..."
+if ! dpkg -l | grep -qw chrony; then
+    echo "Chrony not found, installing Chrony..."
+    sudo apt install -y chrony
+    echo "Enabling and starting Chrony service..."
+    sudo systemctl enable chronyd
+    sudo systemctl start chronyd
+    echo "Chrony installed and started successfully."
+else
+    echo "Chrony is already installed."
+fi
+
 # Install pip if not installed
 if ! command -v pip &> /dev/null; then
     echo "pip not found, installing..."
